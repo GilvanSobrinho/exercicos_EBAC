@@ -1,0 +1,63 @@
+Funcionalidade: Configuração de produto na EBAC-SHOP
+
+  Como cliente da EBAC-SHOP
+  Quero configurar meu produto de acordo com meu tamanho e gosto
+  E escolher a quantidade
+  Para depois inserir no carrinho
+
+  Contexto:
+    Dado que o cliente acessa a página de configuração do produto
+
+  Cenário: Configurar produto com sucesso
+    Quando selecionar cor, tamanho e quantidade válidos
+    Então o sistema deve permitir adicionar o produto ao carrinho
+
+  Cenário: Limitar quantidade máxima por venda
+    Quando selecionar quantidade superior a 10 produtos
+    Então o sistema deve bloquear a ação
+    E exibir mensagem informando o limite permitido
+
+  Cenário: Limpar configurações do produto
+    Dado que o cliente já realizou seleções
+    Quando clicar no botão limpar
+    Então o sistema deve retornar ao estado original
+
+Funcionalidade: Login na plataforma EBAC-SHOP
+
+  Como cliente da EBAC-SHOP
+  Quero fazer login na plataforma
+  Para visualizar meus pedidos
+
+  Contexto:
+    Dado que o cliente acessa a página de login da EBAC-SHOP
+
+  Cenário: Login com credenciais válidas
+    Quando informar usuário válido e senha válida
+    Então o sistema deve autenticar o usuário
+    E direcionar para a tela de checkout
+
+  Cenário: Login com credenciais inválidas
+    Quando informar usuário inválido ou senha inválida
+    Então o sistema não deve permitir o acesso
+    E deve exibir a mensagem "Usuário ou senha inválidos"
+
+Funcionalidade: Cadastro do cliente no checkout
+
+  Como cliente da EBAC-SHOP
+  Quero concluir meu cadastro
+  Para finalizar minha compra
+
+  Contexto:
+    Dado que o cliente está na tela de cadastro do checkout
+
+  Esquema do Cenário: Validação dos dados de cadastro
+    Quando o cliente preencher nome "<nome>", email "<email>", endereço "<endereco>" e telefone "<telefone>"
+    E tentar finalizar o cadastro
+    Então o sistema deve apresentar o resultado "<resultado>"
+
+    Exemplos:
+      | nome        | email              | endereco     | telefone     | resultado                                   |
+      | Maria Silva | maria@email.com    | Rua A, 123   | 11999999999  | cadastro realizado com sucesso              |
+      | João Lima   | joaoemail.com      | Rua B, 456   | 11888888888  | mensagem de erro de e-mail inválido         |
+      |             |                   |              |              | mensagem de alerta de campos obrigatórios   |
+
